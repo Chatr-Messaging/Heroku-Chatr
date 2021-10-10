@@ -4,12 +4,17 @@
   "description": "test app for my project chatr",
   "main": "index.js",
   "dependencies": {
+    "agora-access-token": "^2.0.4",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "unirest": "^0.6.0"
   },
+  "engines": {
+    "node": "14.17.0"
+  },
   "devDependencies": {},
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "brandon shaw",
