@@ -1,3 +1,17 @@
+var request = require('request');
+var options = {
+  'method': 'GET',
+  'url': 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558',
+  'headers': {
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+
+
+/*
 let express = require('express');
 
 path = require('path');
@@ -53,7 +67,7 @@ function generateToken(accountId) {
   const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
   console.log("Token With UserAccount: " + tokenB);
 }
-
+*/
 
 /*
 //WORKING CODE BELOW
