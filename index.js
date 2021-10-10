@@ -67,8 +67,9 @@ var port = process.env.PORT || 8000;
 server.listen(port, function() {
   console.log("Server is listening on port: " + port);
 });
+*/
 
-function generateToken(accountId) {
+function generateToken() {
   const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token')
 
   // Rtc Examples
@@ -76,7 +77,7 @@ function generateToken(accountId) {
   const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
   const channelName = 'testChannel';
   const uid = 2882341273;
-  const account = accountId;
+  const account = '35436846';
   const role = RtcRole.PUBLISHER;
 
   const expirationTimeInSeconds = 3600
@@ -95,7 +96,7 @@ function generateToken(accountId) {
   const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
   console.log("Token With UserAccount: " + tokenB);
 }
-*/
+
 
 /*
 //WORKING CODE BELOW
@@ -154,11 +155,12 @@ const app = express()
 // app.set('views', path.join(__dirname, 'views'))
 // app.set('view engine', 'ejs')
 // app.get('/', (req, res) => res.render('pages/index'))
+
 app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
 app.get('/get_weather', function(req, resp) {
-  console.log(req.body)
-  var userId = req.body.userId
+  //console.log(req.body)
+  //var userId = req.body.userId
   var req = unirest('GET', 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558')
   .end(function (res) {
     if (res.error) throw new Error(res.error);
@@ -166,3 +168,13 @@ app.get('/get_weather', function(req, resp) {
     resp.send(res.raw_body + 'THE USER ID IS: ')
   });
 })
+
+// app.get('/get_token', function(req, resp) {
+//   console.log(req.body)
+//   //var userId = req.body.userId
+//   //var name = req.body.channelName
+//   var req = unirest('GET', '')
+//   .end(function (res) {
+//     generateToken();
+//   });
+// })
