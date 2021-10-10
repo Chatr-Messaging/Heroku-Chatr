@@ -159,6 +159,8 @@ app.get('/get_weather', function(req, resp) {
   .end(function (res) {
     if (res.error) throw new Error(res.error);
     console.log(res.raw_body);
-    resp.send(res.raw_body)
+    var userId = req.query.userId;
+    console.log()
+    resp.send(res.raw_body + 'THE USER ID IS: ' + userId)
   });
 })
