@@ -172,16 +172,16 @@ app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
 app.get('/get_token', function(req, resp) {
   console.log(req.body)
-  //var userId = req.body.userId
-  //var name = req.body.channelName
+  var userId = req.body.userId
+  var channelName = req.body.channelName
   
   //generateToken();
 
   const appID = '404feedfd57c4ed2a3b7e3d5780c5114';
   const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
-  const channelName = 'testChannel';
-  const uid = 2882341273;
-  const account = '35436846';
+  //const channelName = 'testChannel';
+  //const uid = 2882341273;
+  //const userId = '35436846';
   const role = RtcRole.PUBLISHER;
 
   const expirationTimeInSeconds = 3600
@@ -193,11 +193,11 @@ app.get('/get_token', function(req, resp) {
   // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
 
   // Build token with uid
-  const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
-  console.log("Token With Integer Number Uid: " + tokenA);
+  //const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
+  //console.log("Token With Integer Number Uid: " + tokenA);
 
   // Build token with user account
-  const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
+  const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, userId, role, privilegeExpiredTs);
   console.log("Token With UserAccount: " + tokenB);
 
   resp.send(tokenB);
