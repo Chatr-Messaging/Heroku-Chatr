@@ -1,3 +1,30 @@
+const express = require('express');
+const PORT = 8080;
+
+const app = express();
+
+app.listen(
+  PORT, () => console.log('its alive on localhost')
+);
+
+app.get('/get_weather', (req, resp) => {
+  var request = require('request');
+  var options = {
+    'method': 'GET',
+    'url': 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558',
+    'headers': {
+    }
+  };
+
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+    resp.send(response.body)
+  });
+});
+
+
+/*
 var request = require('request');
 var options = {
   'method': 'GET',
@@ -9,7 +36,7 @@ request(options, function (error, response) {
   if (error) throw new Error(error);
   console.log(response.body);
 });
-
+*/
 
 /*
 let express = require('express');
