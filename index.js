@@ -153,14 +153,20 @@ const app = express()
 // app.get('/', (req, res) => res.render('pages/index'))
 app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
+
+const userId = urlParams.get('userId')
+
+console.log('THE USER ID IS: ' + userId);
+
 app.get('/get_weather', function(req, resp) {
   var unirest = require('unirest');
   var req = unirest('GET', 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558')
   .end(function (res) {
     if (res.error) throw new Error(res.error);
     console.log(res.raw_body);
-    var userId = req.query.userId;
-    console.log()
     resp.send(res.raw_body + 'THE USER ID IS: ' + userId)
   });
 })
