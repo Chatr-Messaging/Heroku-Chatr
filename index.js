@@ -14,7 +14,8 @@ app.use(bodyParser.urlcoded({
 }));
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-app.get('/', (req, res) => console.log('Listening on ${ PORT }'))
+app.get('/', (req, res) => res.render('pages/index'))
+app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
 app.get('/get_weather', function(req, resp) {
   var unirest = require('unirest');
