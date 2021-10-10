@@ -1,28 +1,59 @@
-const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token')
+let express = require('express');
 
-// Rtc Examples
-const appID = '404feedfd57c4ed2a3b7e3d5780c5114';
-const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
-const channelName = 'testChannel';
-const uid = 2882341273;
-const account = "2882341273";
-const role = RtcRole.PUBLISHER;
+path = require('path');
 
-const expirationTimeInSeconds = 3600
+let server = require('http').Server(app);
 
-const currentTimestamp = Math.floor(Date.now() / 1000)
+app.get('/', function(req, res, next) {
+        res.sendStatus(200);
+        res.send('Hello world');
+        res.end();
+});
 
-const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
+app.get('/index.js', function(req, res, next) {
+  res.sendStatus(200);
+  res.sendStatus('Index.js called');
+});
 
-// IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
+app.get('/send.js', function(req, res, next) {
+  var userId = req.query.userId;
+  generateToken(userId)
+});
 
-// Build token with uid
-const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
-console.log("Token With Integer Number Uid: " + tokenA);
+var port = process.env.PORT || 8000;
 
-// Build token with user account
-const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
-console.log("Token With UserAccount: " + tokenB);
+server.listen(port, function() {
+  console.log("Server is listening on port: " + port);
+});
+
+function generateToken(accountId) {
+  const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token')
+
+  // Rtc Examples
+  const appID = '404feedfd57c4ed2a3b7e3d5780c5114';
+  const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
+  const channelName = 'testChannel';
+  const uid = 2882341273;
+  const account = "2882341273";
+  const role = RtcRole.PUBLISHER;
+
+  const expirationTimeInSeconds = 3600
+
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+
+  const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
+
+  // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
+
+  // Build token with uid
+  const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
+  console.log("Token With Integer Number Uid: " + tokenA);
+
+  // Build token with user account
+  const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
+  console.log("Token With UserAccount: " + tokenB);
+}
+
 
 /*
 //WORKING CODE BELOW
