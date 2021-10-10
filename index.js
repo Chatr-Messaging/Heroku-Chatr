@@ -3,9 +3,9 @@ const PORT = 8080;
 
 const app = express();
 
-app.listen(
-  PORT, () => console.log('its alive on localhost')
-);
+// app.listen(
+//   PORT, () => console.log('its alive on localhost')
+// );
 
 app.get('/get_weather', (req, resp) => {
   var request = require('request');
