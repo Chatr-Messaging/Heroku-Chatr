@@ -159,16 +159,16 @@ const app = express();
 
 app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
-// app.get('/get_weather', function(req, resp) {
-//   //console.log(req.body)
-//   //var userId = req.body.userId
-//   var req = unirest('GET', 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558')
-//   .end(function (res) {
-//     if (res.error) throw new Error(res.error);
-//     console.log(res.raw_body);
-//     resp.send(res.raw_body + 'THE USER ID IS: ')
-//   });
-// })
+app.get('/get_weather', function(req, resp) {
+  //console.log(req.body)
+  //var userId = req.body.userId
+  var req = unirest('GET', 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558')
+  .end(function (res) {
+    if (res.error) throw new Error(res.error);
+    console.log(res.raw_body);
+    resp.send(res.raw_body + 'THE USER ID IS: ')
+  });
+})
 
 app.get('/get_token', function(req, resp) {
   console.log(req.body)
