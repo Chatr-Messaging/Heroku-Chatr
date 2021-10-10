@@ -70,7 +70,7 @@ server.listen(port, function() {
 */
 
 function generateToken() {
-  const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token')
+  
 
   // Rtc Examples
   const appID = '404feedfd57c4ed2a3b7e3d5780c5114';
@@ -135,13 +135,14 @@ app,listen(port, () => {
 */
 
 
-const express = require('express')
-const path = require('path')
+const express = require('express');
+const path = require('path');
 const unirest = require('unirest');
+const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token');
 const PORT = process.env.PORT || 5000
 var bodyParser = require('body-parser');
 
-const app = express()
+const app = express();
 
 // const url = require('url');
 // const search_params = url.searchParams;
@@ -158,23 +159,46 @@ const app = express()
 
 app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
-app.get('/get_weather', function(req, resp) {
-  //console.log(req.body)
-  //var userId = req.body.userId
-  var req = unirest('GET', 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558')
-  .end(function (res) {
-    if (res.error) throw new Error(res.error);
-    console.log(res.raw_body);
-    resp.send(res.raw_body + 'THE USER ID IS: ')
-  });
-})
-
-// app.get('/get_token', function(req, resp) {
-//   console.log(req.body)
+// app.get('/get_weather', function(req, resp) {
+//   //console.log(req.body)
 //   //var userId = req.body.userId
-//   //var name = req.body.channelName
-//   var req = unirest('GET', '')
+//   var req = unirest('GET', 'https://api.lil.software/weather?latitude=40.709335&longitude=-73.956558')
 //   .end(function (res) {
-//     generateToken();
+//     if (res.error) throw new Error(res.error);
+//     console.log(res.raw_body);
+//     resp.send(res.raw_body + 'THE USER ID IS: ')
 //   });
 // })
+
+app.get('/get_token', function(req, resp) {
+  console.log(req.body)
+  //var userId = req.body.userId
+  //var name = req.body.channelName
+  
+  //generateToken();
+
+  const appID = '404feedfd57c4ed2a3b7e3d5780c5114';
+  const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
+  const channelName = 'testChannel';
+  const uid = 2882341273;
+  const account = '35436846';
+  const role = RtcRole.PUBLISHER;
+
+  const expirationTimeInSeconds = 3600
+
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+
+  const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
+
+  // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
+
+  // Build token with uid
+  const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
+  console.log("Token With Integer Number Uid: " + tokenA);
+
+  // Build token with user account
+  const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
+  console.log("Token With UserAccount: " + tokenB);
+
+  resp.send(tokenB);
+})
