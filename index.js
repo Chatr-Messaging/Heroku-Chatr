@@ -1,6 +1,10 @@
 const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token')
+const express = requires('express')
+const path = require('path')
+const app = experss()
 
-// Rtc Examples
+app.get('/get-token', function(resp) {
+  // Rtc Examples
 const appID = '404feedfd57c4ed2a3b7e3d5780c5114';
 const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
 const channelName = 'testChannel';
@@ -17,12 +21,15 @@ const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
 // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
 
 // Build token with uid
-const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
-console.log("Token With Integer Number Uid: " + tokenA);
+//const tokenA = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, uid, role, privilegeExpiredTs);
+//console.log("Token With Integer Number Uid: " + tokenA);
 
 // Build token with user account
 const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
-console.log("Token With UserAccount: " + tokenB);
+//console.log("Token With UserAccount: " + tokenB);
+
+  resp.send(tokenB)
+})
 
 /*
 //WORKING CODE BELOW
