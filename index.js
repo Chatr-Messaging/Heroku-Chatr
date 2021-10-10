@@ -1,11 +1,12 @@
+/*
 const express = require('express');
 const PORT = 8080;
 
 const app = express();
 
-// app.listen(
-//   PORT, () => console.log('its alive on localhost')
-// );
+app.listen(
+  PORT, () => console.log('its alive on localhost')
+);
 
 app.get('/get_weather', (req, resp) => {
   var request = require('request');
@@ -22,7 +23,7 @@ app.get('/get_weather', (req, resp) => {
     resp.send(response.body)
   });
 });
-
+*/
 
 /*
 var request = require('request');
@@ -132,7 +133,7 @@ app,listen(port, () => {
 });
 */
 
-/*
+
 const express = require('express')
 const path = require('path')
 const unirest = require('unirest');
@@ -142,14 +143,14 @@ var bodyParser = require('body-parser');
 const app = express()
 
 
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.json());
-app.use(bodyParser.urlcoded({
-  extended: true
-}));
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-app.get('/', (req, res) => res.render('pages/index'))
+// app.use(express.static(path.join(__dirname, 'public')))
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlcoded({
+//   extended: true
+// }));
+// app.set('views', path.join(__dirname, 'views'))
+// app.set('view engine', 'ejs')
+// app.get('/', (req, res) => res.render('pages/index'))
 app.listen(PORT, () => console.log('Listening on ${ PORT }'))
 
 app.get('/get_weather', function(req, resp) {
@@ -161,4 +162,3 @@ app.get('/get_weather', function(req, resp) {
     resp.send(res.raw_body)
   });
 })
-*/
