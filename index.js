@@ -34,7 +34,7 @@ function generateToken(accountId) {
   const appCertificate = 'e60e21787d5d4b1aa3d03e9869b546cb';
   const channelName = 'testChannel';
   const uid = 2882341273;
-  const account = "2882341273";
+  const account = accountId;
   const role = RtcRole.PUBLISHER;
 
   const expirationTimeInSeconds = 3600
