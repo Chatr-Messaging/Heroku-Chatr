@@ -134,15 +134,20 @@ app,listen(port, () => {
 });
 */
 
-
+const Moralis = require('moralis/node');
 const express = require('express');
 const path = require('path');
 const unirest = require('unirest');
 const {RtcTokenBuilder, RtmTokenBuilder, RtcRole, RtmRole} = require('agora-access-token');
 const PORT = process.env.PORT || 5000
+const serverUrl = "https://9c8nrl6lfq8u.moralis.io:2053/server";
+const appId = "TCDv7lnGwNN7RIhlj30wA69dnaamxtsmqcTnm3ch";
+
 var bodyParser = require('body-parser');
 
 const app = express();
+
+Moralis.start({ serverUrl, appId });
 
 // const url = require('url');
 // const search_params = url.searchParams;
@@ -168,6 +173,26 @@ app.get('/get_weather', function(req, resp) {
     console.log(res.raw_body);
     resp.send(res.raw_body + 'THE USER ID IS: ')
   });
+})
+
+app.get('/test_signup', function(req, resp) {
+  console.log("Hello World: " + req.query.username + " anddd pass: " + req.query.password);
+
+  // try {
+  //   const user = await Moralis.User.logIn("unobrandon", "password");
+  // } catch(error) {
+  //   console.log("error loggin in: " + error);
+  // }
+
+  const currentUser = Moralis.User.current();
+  if (currentUser) {
+      // do stuff with the user
+      console.log("Logged in with: " + currentUser);
+  } else {
+      // show the signup or login page
+      console.log("CAN NOT LOG IN");
+  }
+
 })
 
 app.get('/get_token', function(req, resp) {
